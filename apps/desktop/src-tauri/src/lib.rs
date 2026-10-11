@@ -28,6 +28,9 @@ pub fn specta_builder() -> tauri_specta::Builder<tauri::Wry> {
             commands::app::open_external_url,
             commands::app::print_window,
             commands::opened::take_opened_files,
+            commands::library::plan_library_move,
+            commands::library::move_library,
+            commands::library::cancel_library_move,
             commands::settings::get_settings,
             commands::settings::set_theme,
             commands::settings::set_accent,
@@ -288,6 +291,7 @@ pub fn specta_builder() -> tauri_specta::Builder<tauri::Wry> {
             events::JobEventPayload,
             events::LibraryChanged,
             events::FilesOpened,
+            commands::library::LibraryMoveProgress,
             events::ImportFinished,
             events::SessionChanged,
             events::DetailsFilled,
@@ -342,6 +346,7 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(builder.invoke_handler())
         .manage(commands::opened::OpenedFiles::default())
+        .manage(commands::library::MoveCancel::default())
         .register_asynchronous_uri_scheme_protocol("book", protocol::handle)
         .setup(move |app| {
             builder.mount_events(app);

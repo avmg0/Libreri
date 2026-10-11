@@ -41,6 +41,7 @@ mod paths;
 pub use paths::write_atomic;
 mod profiles;
 mod reading;
+pub mod relocate;
 mod scan;
 mod sidecar;
 mod study;

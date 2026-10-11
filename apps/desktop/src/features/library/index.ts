@@ -7,6 +7,7 @@ export {
   useFacets,
   useFolders,
   currentLibraryKey,
+  libKey,
 } from "./api";
 export { useLibraryActions } from "./hooks/useLibraryActions";
 export { useBookActions } from "./hooks/useBookActions";

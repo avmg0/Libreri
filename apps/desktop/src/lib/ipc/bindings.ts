@@ -26,6 +26,16 @@ export const commands = {
 	 *  book it already is. Waits (returns nothing) while no library is open.
 	 */
 	takeOpenedFiles: () => typedError<OpenedFileDto[], AppError>(__TAURI_INVOKE("take_opened_files")),
+	/**  Checks that the library can move into `parent` and says how. */
+	planLibraryMove: (parent: string) => typedError<MovePlanDto, AppError>(__TAURI_INVOKE("plan_library_move", { parent })),
+	/**
+	 *  Moves the open library into `parent` (owner only): closes it, renames
+	 *  or copies the folder, and opens it in its new place. If anything goes
+	 *  wrong the library stays where it was and opens again there.
+	 */
+	moveLibrary: (parent: string) => typedError<MovedLibrary, AppError>(__TAURI_INVOKE("move_library", { parent })),
+	/**  Stops a move that is copying; the library stays where it was. */
+	cancelLibraryMove: () => __TAURI_INVOKE<void>("cancel_library_move"),
 	getSettings: () => __TAURI_INVOKE<SettingsDto>("get_settings"),
 	setTheme: (theme: Theme) => typedError<SettingsDto, AppError>(__TAURI_INVOKE("set_theme", { theme })),
 	setAccent: (accent: string | null) => typedError<SettingsDto, AppError>(__TAURI_INVOKE("set_accent", { accent })),
@@ -700,6 +710,7 @@ export const events = {
 	importFinished: makeEvent<ImportFinished>("import-finished"),
 	jobEventPayload: makeEvent<JobEventPayload>("job-event-payload"),
 	libraryChanged: makeEvent<LibraryChanged>("library-changed"),
+	libraryMoveProgress: makeEvent<LibraryMoveProgress>("library-move-progress"),
 	mathsDownload: makeEvent<MathsDownload>("maths-download"),
 	ocrFinished: makeEvent<OcrFinished>("ocr-finished"),
 	ocrLanguageDownload: makeEvent<OcrLanguageDownload>("ocr-language-download"),
@@ -1823,6 +1834,13 @@ export type KokoroInfo = {
  */
 export type LibraryChanged = Record<string, never>;
 
+/**  Progress of copying a library to another disk. */
+export type LibraryMoveProgress = {
+	done: number | null,
+	total: number | null,
+	file: string,
+};
+
 export type LibrarySummary = {
 	id: string,
 	name: string,
@@ -1933,6 +1951,24 @@ export type ModelInfo = {
 	/**  Offered first; the bigger ones are in "More models". */
 	recommended: boolean,
 	downloaded: boolean,
+};
+
+/**  What moving the library to a folder would do. */
+export type MovePlanDto = {
+	/**  The library's new folder. */
+	target: string,
+	/**  Same disk: the move is a rename, done at once. */
+	sameDisk: boolean,
+	files: number,
+	/**  `f64`: sizes over 4 GB, as a plain TypeScript number. */
+	bytes: number | null,
+};
+
+/**  How a move ended. */
+export type MovedLibrary = {
+	library: LibrarySummary,
+	/**  The old folder could not go to the Trash; why. */
+	oldLeftBehind: string | null,
 };
 
 /**  A voice that can read aloud now. */

@@ -215,6 +215,11 @@ impl JobQueue {
         id
     }
 
+    /// Jobs queued or running.
+    pub fn pending(&self) -> usize {
+        lock(&self.cancels).len()
+    }
+
     /// Requests cancellation; the job stops at its next `check_cancelled`.
     pub fn cancel(&self, id: JobId) -> bool {
         match lock(&self.cancels).get(&id) {

@@ -1,4 +1,5 @@
-import { FolderOpen, HeartPulse, RefreshCw, Wrench } from "lucide-react";
+import { FolderInput, FolderOpen, HeartPulse, RefreshCw, Wrench } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { ask } from "@tauri-apps/plugin-dialog";
 import { useQuery } from "@tanstack/react-query";
@@ -7,6 +8,7 @@ import { useFacets } from "@/features/library";
 import { usePortability } from "@/features/portability";
 import { commands, unwrap, type LibrarySummary, type SessionDto } from "@/lib/ipc";
 import { Group, Row } from "../parts";
+import { MoveLibraryDialog } from "./MoveLibraryDialog";
 import { SearchIndexGroup } from "./Search";
 
 function size(bytes: number): string {
@@ -29,6 +31,7 @@ export function LibrarySettings({
   session: SessionDto;
 }) {
   const { data: facets } = useFacets();
+  const [moving, setMoving] = useState(false);
   const setHealth = usePortability((s) => s.setHealth);
   const { data: pageCache, refetch: refetchCache } = useQuery({
     queryKey: ["page-cache"],
@@ -88,6 +91,11 @@ export function LibrarySettings({
           >
             <FolderOpen /> Show
           </Button>
+          {session.canManageProfiles && (
+            <Button variant="outline" size="sm" onClick={() => setMoving(true)}>
+              <FolderInput /> Move…
+            </Button>
+          )}
         </Row>
         <Row label="Books">
           <span className="tabular-nums">{facets?.total ?? library.bookCount}</span>
@@ -151,6 +159,7 @@ export function LibrarySettings({
           <span className="tabular-nums">{storage ? size(storage.data ?? 0) : "…"}</span>
         </Row>
       </Group>
+      {moving && <MoveLibraryDialog library={library} onClose={() => setMoving(false)} />}
       <SearchIndexGroup />
       <Group title="Maintenance" scope="library">
         <Row
