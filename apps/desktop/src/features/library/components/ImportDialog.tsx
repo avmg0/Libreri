@@ -1,4 +1,4 @@
-import { FileUp } from "lucide-react";
+import { BookOpen, FileUp } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
@@ -13,27 +13,46 @@ function basename(p: string) {
 }
 
 export function ImportDialog() {
-  const { pending, mode, close, setMode, setFolder } = useImport();
+  const { pending, mode, close, setMode, setFolder, setOpenAfterJob } = useImport();
   const { data: folders = [] } = useFolders();
   const importPaths = useImportPaths();
   if (!pending) return null;
   const folder = pending.folder;
 
   const n = pending.paths.length;
+  const opening = pending.open === true;
   const start = () => {
     importPaths.mutate(
       { paths: pending.paths, folder, mode },
-      { onError: (e) => toast.error("Could not start the import", { description: String(e) }) },
+      {
+        onSuccess: (job) => opening && setOpenAfterJob(job),
+        onError: (e) => toast.error("Could not start the import", { description: String(e) }),
+      },
     );
     close();
   };
+  const first = basename(pending.paths[0] ?? "");
+  // One file opened from the computer (a single import may be a folder).
+  const one = opening && n === 1;
 
   return (
     <Dialog
       open
       onOpenChange={(o) => !o && close()}
-      title={n === 1 ? `Import “${basename(pending.paths[0] ?? "")}”` : `Import ${n} items`}
-      description="Folders keep their structure. Books already in the library are skipped."
+      title={
+        opening
+          ? n === 1
+            ? `Open “${first}”`
+            : `Open ${n} files`
+          : n === 1
+            ? `Import “${first}”`
+            : `Import ${n} items`
+      }
+      description={
+        opening
+          ? `Libreri reads books from your library. Add ${n === 1 ? "it" : "them"} to open ${n === 1 ? "it" : "them"}; your notes and reading place are kept there.`
+          : "Folders keep their structure. Books already in the library are skipped."
+      }
     >
       {n > 1 && (
         <ul className="max-h-28 overflow-y-auto rounded-md border bg-sidebar px-3 py-2 font-mono text-[11.5px] text-muted-foreground">
@@ -59,12 +78,20 @@ export function ImportDialog() {
       </label>
       <fieldset className="flex flex-col gap-1">
         <legend className="mb-1 text-[11.5px] font-medium text-muted-foreground">
-          The original files
+          {one ? "The original file" : "The original files"}
         </legend>
         {(
           [
-            ["move", "Move them into the library", "Keeps one copy on your disk."],
-            ["copy", "Copy them", "Leaves the originals where they are."],
+            [
+              "move",
+              one ? "Move it into the library" : "Move them into the library",
+              "Keeps one copy on your disk.",
+            ],
+            [
+              "copy",
+              one ? "Copy it" : "Copy them",
+              one ? "Leaves the original where it is." : "Leaves the originals where they are.",
+            ],
           ] as const
         ).map(([value, label, hint]) => (
           <label
@@ -94,7 +121,15 @@ export function ImportDialog() {
           Cancel
         </Button>
         <Button autoFocus onClick={start}>
-          <FileUp /> Import
+          {opening ? (
+            <>
+              <BookOpen /> Add and open
+            </>
+          ) : (
+            <>
+              <FileUp /> Import
+            </>
+          )}
         </Button>
       </div>
     </Dialog>

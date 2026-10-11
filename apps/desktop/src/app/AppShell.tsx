@@ -57,6 +57,7 @@ import {
   useLibraryActions,
   useLibraryDialogs,
   useLibraryEvents,
+  useOpenedFiles,
   useLibraryView,
   SeriesView,
 } from "@/features/library";
@@ -141,6 +142,7 @@ export function AppShell({ library, session }: { library: LibrarySummary; sessio
   const libraryView = useLibraryView();
   const { setView, toggleDetails, nav, setNav } = libraryView;
   useLibraryEvents();
+  useOpenedFiles();
   // A little after starting: is there a newer Libreri? (The main window only.)
   useEffect(() => {
     if (getCurrentWindow().label !== "main") return;

@@ -22,6 +22,7 @@ pub mod listening;
 pub mod maths;
 pub mod notes;
 pub mod ocr_models;
+pub mod opened;
 pub mod organize;
 pub mod pages;
 pub mod portability;

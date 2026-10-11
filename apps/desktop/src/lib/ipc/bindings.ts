@@ -21,6 +21,11 @@ export const commands = {
 	 *  web view, so printing goes through here.
 	 */
 	printWindow: () => typedError<null, AppError>(__TAURI_INVOKE("print_window")),
+	/**
+	 *  Hands over the files opened from the computer, each with the library
+	 *  book it already is. Waits (returns nothing) while no library is open.
+	 */
+	takeOpenedFiles: () => typedError<OpenedFileDto[], AppError>(__TAURI_INVOKE("take_opened_files")),
 	getSettings: () => __TAURI_INVOKE<SettingsDto>("get_settings"),
 	setTheme: (theme: Theme) => typedError<SettingsDto, AppError>(__TAURI_INVOKE("set_theme", { theme })),
 	setAccent: (accent: string | null) => typedError<SettingsDto, AppError>(__TAURI_INVOKE("set_accent", { accent })),
@@ -689,6 +694,7 @@ export const events = {
 	dictionaryDownload: makeEvent<DictionaryDownload>("dictionary-download"),
 	exportFinished: makeEvent<ExportFinished>("export-finished"),
 	feedsChanged: makeEvent<FeedsChanged>("feeds-changed"),
+	filesOpened: makeEvent<FilesOpened>("files-opened"),
 	foreignImported: makeEvent<ForeignImported>("foreign-imported"),
 	helperInstall: makeEvent<HelperInstall>("helper-install"),
 	importFinished: makeEvent<ImportFinished>("import-finished"),
@@ -1549,6 +1555,12 @@ export type FeedsDto = {
 /**  Every file format Libreri accepts, detected from the file extension. */
 export type FileType = "pdf" | "epub" | "mobi" | "azw3" | "fb2" | "txt" | "md" | "rtf" | "djvu" | "cbz" | "cbr" | "cb7" | "cba" | "cbt" | "mp3" | "m4b" | "m4a" | "aac" | "ogg" | "opus" | "flac";
 
+/**
+ *  Files were opened with Libreri from the computer; the interface takes
+ *  them with `take_opened_files`.
+ */
+export type FilesOpened = Record<string, never>;
+
 export type FolderChange = {
 	name: string | null,
 	/**  Move into this folder ("" = the top level). */
@@ -2068,6 +2080,15 @@ export type OnlineChange = {
 export type OnlineSettingsDto = {
 	sources: SourceInfo[],
 	fillOnImport: boolean,
+};
+
+/**  A file opened from the computer, and the book it already is, if any. */
+export type OpenedFileDto = {
+	path: string,
+	/**  The book in the library with the same content. */
+	bookId: string | null,
+	title: string | null,
+	fileType: string | null,
 };
 
 /**  One page of the result, in order. */

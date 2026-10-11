@@ -41,11 +41,19 @@ export const BOOK_EXTENSIONS = [
 ];
 
 interface ImportState {
-  pending: { paths: string[]; folder: string } | null;
+  /** `open`: files opened from the computer, opened once they are added. */
+  pending: { paths: string[]; folder: string; open?: boolean } | null;
+  /** The import whose books open when it finishes. */
+  openAfterJob: string | null;
+  /** The choice of move or copy to go back to after opening files. */
+  modeBefore: ImportModeDto;
   mode: ImportModeDto;
   /** A file from the desktop is being dragged over the window. */
   hovering: boolean;
   ask: (paths: string[], folder: string) => void;
+  /** Asks to add files opened from the computer, then opens them. */
+  askToOpen: (paths: string[]) => void;
+  setOpenAfterJob: (job: string | null) => void;
   close: () => void;
   setMode: (mode: ImportModeDto) => void;
   setFolder: (folder: string) => void;
@@ -53,10 +61,26 @@ interface ImportState {
 
 export const useImport = create<ImportState>((set) => ({
   pending: null,
+  openAfterJob: null,
+  modeBefore: "move",
   mode: "move",
   hovering: false,
   ask: (paths, folder) => paths.length && set({ pending: { paths, folder } }),
-  close: () => set({ pending: null }),
+  // Files opened from the computer are copied by default: someone who
+  // double-clicks a PDF does not expect it to leave its folder.
+  askToOpen: (paths) =>
+    paths.length &&
+    set((s) => ({
+      pending: {
+        paths: [...new Set([...(s.pending?.open ? s.pending.paths : []), ...paths])],
+        folder: s.pending?.open ? s.pending.folder : currentFolder(),
+        open: true,
+      },
+      modeBefore: s.pending?.open ? s.modeBefore : s.mode,
+      mode: "copy",
+    })),
+  setOpenAfterJob: (openAfterJob) => set({ openAfterJob }),
+  close: () => set((s) => ({ pending: null, mode: s.pending?.open ? s.modeBefore : s.mode })),
   setMode: (mode) => set({ mode }),
   setFolder: (folder) => set((s) => (s.pending ? { pending: { ...s.pending, folder } } : {})),
 }));

@@ -206,6 +206,14 @@ Until the builds are signed, your computer asks before opening Libreri the first
 
 After that, Libreri tells you when a new version is ready (Settings › General › Updates).
 
+### Open books with Libreri
+
+Libreri can open PDF, EPUB, Kindle (MOBI, AZW3), FB2, DjVu, comic (CBZ, CBR, CB7, CBT, CBA) and M4B files from your file manager. A book already in your library opens straight away; any other file is added first (copied, unless you choose to move it). To make Libreri the default for a type:
+
+- **macOS:** right-click a file › **Get Info** › **Open with** › choose Libreri › **Change All…**
+- **Windows:** right-click a file › **Open with** › **Choose another app** › Libreri › **Always**. Or Settings › Apps › Default apps › Libreri.
+- **Linux:** right-click a file › **Open With** › Libreri, and set it as the default there (or in a terminal: `xdg-mime default Libreri.desktop application/pdf`; for the Flatpak, `io.github.avmg0.Libreri.desktop`).
+
 ## Build from source
 
 **You need**

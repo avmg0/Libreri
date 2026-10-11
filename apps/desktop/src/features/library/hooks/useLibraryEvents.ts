@@ -6,6 +6,7 @@ import { create } from "zustand";
 import { events, type ImportFinished } from "@/lib/ipc";
 import { report } from "@/lib/windows";
 import { libKey } from "../api";
+import { openImported } from "../opened";
 
 export interface RunningJob {
   id: string;
@@ -109,6 +110,10 @@ export function useLibraryEvents() {
         }
       }),
       events.importFinished.listen(({ payload }) => {
+        openImported(payload.jobId, [
+          ...payload.addedIds,
+          ...payload.duplicates.map((d) => d.existingId),
+        ]);
         const { title, description } = summarise(payload);
         const hasProblems = payload.failed.length > 0;
         report(() =>

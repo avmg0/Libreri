@@ -27,6 +27,7 @@ pub fn specta_builder() -> tauri_specta::Builder<tauri::Wry> {
             commands::app::app_info,
             commands::app::open_external_url,
             commands::app::print_window,
+            commands::opened::take_opened_files,
             commands::settings::get_settings,
             commands::settings::set_theme,
             commands::settings::set_accent,
@@ -286,6 +287,7 @@ pub fn specta_builder() -> tauri_specta::Builder<tauri::Wry> {
         .events(tauri_specta::collect_events![
             events::JobEventPayload,
             events::LibraryChanged,
+            events::FilesOpened,
             events::ImportFinished,
             events::SessionChanged,
             events::DetailsFilled,
@@ -313,18 +315,38 @@ pub fn specta_builder() -> tauri_specta::Builder<tauri::Wry> {
         ])
 }
 
+/// One Libreri at a time: a second copy started with a file (Windows and
+/// Linux) passes it to the first and quits.
+fn single_instance() -> tauri::plugin::TauriPlugin<tauri::Wry> {
+    let builder = tauri_plugin_single_instance::Builder::new().callback(|app, args, _cwd| {
+        commands::opened::queue(app, commands::opened::from_args(args));
+    });
+    // Inside a Flatpak only names under the app's own id may be used.
+    match std::env::var("FLATPAK_ID") {
+        Ok(id) if !id.is_empty() => builder.dbus_id(id),
+        _ => builder,
+    }
+    .build()
+}
+
 /// Starts the desktop app.
 pub fn run() {
     let builder = specta_builder();
 
     tauri::Builder::default()
+        // Must come first: a second copy started with a file (Windows and
+        // Linux) passes it to this one and quits.
+        .plugin(single_instance())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(builder.invoke_handler())
+        .manage(commands::opened::OpenedFiles::default())
         .register_asynchronous_uri_scheme_protocol("book", protocol::handle)
         .setup(move |app| {
             builder.mount_events(app);
+            // Windows and Linux: files Libreri was started with.
+            commands::opened::queue(app.handle(), commands::opened::from_args(std::env::args()));
             let state = AppState::initialise(app.handle())?;
             app.manage(state);
             app.state::<AppState>().reopen_last_library();
@@ -347,8 +369,20 @@ pub fn run() {
                 }
             }
         })
-        .run(tauri::generate_context!())
-        .expect("error while running Libreri");
+        .build(tauri::generate_context!())
+        .expect("error while building Libreri")
+        .run(|app, event| {
+            // macOS: files opened from the Finder arrive as an event.
+            #[cfg(target_os = "macos")]
+            if let tauri::RunEvent::Opened { urls } = event {
+                commands::opened::queue(
+                    app,
+                    urls.into_iter().filter_map(|u| u.to_file_path().ok()),
+                );
+            }
+            #[cfg(not(target_os = "macos"))]
+            let _ = (app, event);
+        });
 }
 
 #[cfg(test)]

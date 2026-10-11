@@ -55,6 +55,11 @@ impl From<libreri_jobs::JobEvent> for JobEventPayload {
     }
 }
 
+/// Files were opened with Libreri from the computer; the interface takes
+/// them with `take_opened_files`.
+#[derive(Debug, Clone, Default, Serialize, Type, Event)]
+pub struct FilesOpened {}
+
 /// The books or folders changed (import, scan, rebuild). The interface
 /// refetches its lists.
 #[derive(Debug, Clone, Default, Serialize, Type, Event)]

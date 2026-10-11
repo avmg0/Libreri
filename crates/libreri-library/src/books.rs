@@ -28,6 +28,17 @@ impl Library {
         }
     }
 
+    /// The book with the same content as `path` (a file opened from the
+    /// computer's file manager), if the signed-in profile has it.
+    pub fn book_for_file(&self, path: &Path) -> Result<Option<Book>> {
+        let id = paths::hash_file(path)?;
+        match self.book(&id) {
+            Ok(book) => Ok(Some(book)),
+            Err(Error::BookNotFound) => Ok(None),
+            Err(e) => Err(e),
+        }
+    }
+
     /// Any book, whoever is signed in (for scans and imports).
     pub(crate) fn record(&self, id: &BookId) -> Result<Book> {
         let profile = self.viewer();

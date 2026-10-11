@@ -11,6 +11,7 @@ export {
 export { useLibraryActions } from "./hooks/useLibraryActions";
 export { useBookActions } from "./hooks/useBookActions";
 export { useLibraryEvents } from "./hooks/useLibraryEvents";
+export { useOpenedFiles } from "./opened";
 export { WelcomeScreen } from "./components/WelcomeScreen";
 export { LibraryView } from "./components/LibraryView";
 export { SeriesView } from "./components/SeriesView";

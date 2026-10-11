@@ -8,5 +8,5 @@ Icon=io.github.avmg0.Libreri
 Terminal=false
 Categories=Office;Viewer;Education;
 Keywords=books;ebook;pdf;epub;reader;library;notes;highlights;audiobook;podcast;flashcards;
-MimeType=application/pdf;application/epub+zip;application/x-mobipocket-ebook;application/x-fictionbook+xml;image/vnd.djvu;text/markdown;application/rtf;application/vnd.comicbook+zip;application/vnd.comicbook-rar;
+MimeType=application/pdf;application/epub+zip;application/x-mobipocket-ebook;application/vnd.amazon.mobi8-ebook;application/x-fictionbook+xml;image/vnd.djvu;image/vnd.djvu+multipage;application/vnd.comicbook+zip;application/vnd.comicbook-rar;application/x-cb7;application/x-cbt;audio/x-m4b;text/markdown;
 StartupWMClass=Libreri

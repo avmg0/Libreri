@@ -42,7 +42,154 @@
     },
     "license": "GPL-3.0-or-later",
     "licenseFile": "../../../LICENSE",
-    "copyright": "Copyright © 2026 avmg0 and Libreri contributors. Licensed under the GNU GPL v3 or later."
+    "copyright": "Copyright © 2026 avmg0 and Libreri contributors. Licensed under the GNU GPL v3 or later.",
+    "fileAssociations": [
+      {
+        "ext": [
+          "pdf"
+        ],
+        "name": "PDF document",
+        "description": "PDF document",
+        "role": "Viewer",
+        "rank": "Default",
+        "mimeType": "application/pdf"
+      },
+      {
+        "ext": [
+          "epub"
+        ],
+        "name": "EPUB book",
+        "description": "EPUB book",
+        "role": "Viewer",
+        "rank": "Default",
+        "mimeType": "application/epub+zip",
+        "contentTypes": [
+          "org.idpf.epub-container"
+        ]
+      },
+      {
+        "ext": [
+          "mobi",
+          "azw",
+          "prc"
+        ],
+        "name": "Kindle book",
+        "description": "Kindle book",
+        "role": "Viewer",
+        "rank": "Default",
+        "mimeType": "application/x-mobipocket-ebook"
+      },
+      {
+        "ext": [
+          "azw3",
+          "kf8"
+        ],
+        "name": "Kindle book (KF8)",
+        "description": "Kindle book",
+        "role": "Viewer",
+        "rank": "Default",
+        "mimeType": "application/vnd.amazon.mobi8-ebook"
+      },
+      {
+        "ext": [
+          "fb2"
+        ],
+        "name": "FictionBook",
+        "description": "FictionBook",
+        "role": "Viewer",
+        "rank": "Default",
+        "mimeType": "application/x-fictionbook+xml"
+      },
+      {
+        "ext": [
+          "djvu",
+          "djv"
+        ],
+        "name": "DjVu document",
+        "description": "DjVu document",
+        "role": "Viewer",
+        "rank": "Default",
+        "mimeType": "image/vnd.djvu"
+      },
+      {
+        "ext": [
+          "cbz"
+        ],
+        "name": "Comic book (ZIP)",
+        "description": "Comic book",
+        "role": "Viewer",
+        "rank": "Default",
+        "mimeType": "application/vnd.comicbook+zip"
+      },
+      {
+        "ext": [
+          "cbr"
+        ],
+        "name": "Comic book (RAR)",
+        "description": "Comic book",
+        "role": "Viewer",
+        "rank": "Default",
+        "mimeType": "application/vnd.comicbook-rar"
+      },
+      {
+        "ext": [
+          "cb7"
+        ],
+        "name": "Comic book (7z)",
+        "description": "Comic book",
+        "role": "Viewer",
+        "rank": "Default",
+        "mimeType": "application/x-cb7"
+      },
+      {
+        "ext": [
+          "cbt"
+        ],
+        "name": "Comic book (TAR)",
+        "description": "Comic book",
+        "role": "Viewer",
+        "rank": "Default",
+        "mimeType": "application/x-cbt"
+      },
+      {
+        "ext": [
+          "cba"
+        ],
+        "name": "Comic book (ACE)",
+        "description": "Comic book",
+        "role": "Viewer",
+        "rank": "Default"
+      },
+      {
+        "ext": [
+          "m4b"
+        ],
+        "name": "Audiobook",
+        "description": "Audiobook",
+        "role": "Viewer",
+        "rank": "Default",
+        "mimeType": "audio/x-m4b"
+      },
+      {
+        "ext": [
+          "md",
+          "markdown"
+        ],
+        "name": "Markdown document",
+        "description": "Markdown document",
+        "role": "Viewer",
+        "rank": "Alternate",
+        "mimeType": "text/markdown"
+      }
+    ],
+    "linux": {
+      "deb": {
+        "desktopTemplate": "linux/libreri.desktop"
+      },
+      "rpm": {
+        "desktopTemplate": "linux/libreri.desktop"
+      }
+    }
   },
   "plugins": {
     "updater": {
