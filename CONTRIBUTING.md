@@ -6,9 +6,15 @@ Thank you for wanting to help. Bug reports, ideas, fixes and translations are al
 
 Open an [issue](https://github.com/avmg0/Libreri/issues). For a bug, say which system you use (macOS, Windows or Linux, and the version), what you did, what you expected, and what happened instead. A screenshot helps.
 
+## Branches
+
+- **`main`** holds released, tested code. Nothing is pushed to it directly; it changes only by merging `dev` through a pull request, and releases are tagged from it.
+- **`dev`** is where work happens. Larger pieces of work can use their own branch from `dev` (for example `feature/look-up`) that is merged back into `dev`.
+- **`cla-signatures`** is kept by the contributor-agreement bot. Do not change it or merge it.
+
 ## Contributing code
 
-1. Fork the repository and make your change on a branch.
+1. Fork the repository and make your change on a branch from `dev`; open the pull request against `dev`.
 2. Follow [code structure](docs/code-structure.md) for where code goes, and [data portability](docs/data-portability.md) before touching anything that links notes to books.
 3. Run the checks before you open a pull request:
    ```sh
