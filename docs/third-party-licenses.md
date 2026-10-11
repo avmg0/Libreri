@@ -25,9 +25,9 @@ These run as separate programs or are downloaded only when you ask; they keep th
 
 ## Licences at a glance
 
-**Rust crates (879):** MIT OR Apache-2.0 (419), MIT (213), Apache-2.0 OR MIT (80), Zlib OR Apache-2.0 OR MIT (20), Apache-2.0 (20), Unicode-3.0 (20), MPL-2.0 (19), Unlicense OR MIT (14), BSD-3-Clause (13), ISC (7), Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT (5), BSD-2-Clause (4), MIT OR Apache-2.0 OR Zlib (4), Apache-2.0 OR ISC OR MIT (3), BSD-3-Clause OR Apache-2.0 (3), BSD-3-Clause AND MIT (2), BSD-3-Clause OR MIT (2), CC0-1.0 OR MIT-0 OR Apache-2.0 (2), Zlib (2), Apache-2.0 OR MIT OR Zlib (2), MIT OR Zlib OR Apache-2.0 (2), BSD-3-Clause OR MIT OR Apache-2.0 (2), MIT OR Apache-2.0 OR LGPL-2.1-or-later (2), CDLA-Permissive-2.0 (2), Unlicense (2), BSD-2-Clause OR Apache-2.0 OR MIT (2), 0BSD OR MIT OR Apache-2.0 (1), CC0-1.0 OR Apache-2.0 OR Apache-2.0 WITH LLVM-exception (1), Apache-2.0 AND MIT (1), (Apache-2.0 OR MIT) AND BSD-3-Clause (1), Apache-2.0  OR  MIT (1), MIT  OR  Apache-2.0 (1), CC0-1.0 OR Apache-2.0 (1), (MIT OR Apache-2.0) AND NCSA (1), CC0-1.0 (1), Apache-2.0 AND ISC (1), Apache-2.0 OR BSL-1.0 (1), Apache-2.0 WITH LLVM-exception (1), (MIT OR Apache-2.0) AND Unicode-3.0 (1).
+**Rust crates (878):** MIT OR Apache-2.0 (419), MIT (212), Apache-2.0 OR MIT (80), Zlib OR Apache-2.0 OR MIT (20), Apache-2.0 (20), Unicode-3.0 (20), MPL-2.0 (19), Unlicense OR MIT (14), BSD-3-Clause (13), ISC (7), Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT (5), BSD-2-Clause (4), MIT OR Apache-2.0 OR Zlib (4), Apache-2.0 OR ISC OR MIT (3), BSD-3-Clause OR Apache-2.0 (3), BSD-3-Clause AND MIT (2), BSD-3-Clause OR MIT (2), CC0-1.0 OR MIT-0 OR Apache-2.0 (2), Zlib (2), Apache-2.0 OR MIT OR Zlib (2), MIT OR Zlib OR Apache-2.0 (2), BSD-3-Clause OR MIT OR Apache-2.0 (2), MIT OR Apache-2.0 OR LGPL-2.1-or-later (2), CDLA-Permissive-2.0 (2), Unlicense (2), BSD-2-Clause OR Apache-2.0 OR MIT (2), 0BSD OR MIT OR Apache-2.0 (1), CC0-1.0 OR Apache-2.0 OR Apache-2.0 WITH LLVM-exception (1), Apache-2.0 AND MIT (1), (Apache-2.0 OR MIT) AND BSD-3-Clause (1), Apache-2.0  OR  MIT (1), MIT  OR  Apache-2.0 (1), CC0-1.0 OR Apache-2.0 (1), (MIT OR Apache-2.0) AND NCSA (1), CC0-1.0 (1), Apache-2.0 AND ISC (1), Apache-2.0 OR BSL-1.0 (1), Apache-2.0 WITH LLVM-exception (1), (MIT OR Apache-2.0) AND Unicode-3.0 (1).
 
-**Interface packages (260):** MIT (192), ISC (38), Apache-2.0 (11), BSD-3-Clause (8), OFL-1.1 (2), Apache-2.0 OR MIT (1), MIT OR Apache-2.0 (1), PSF-2.0 (1), (MPL-2.0 OR Apache-2.0) (1), BSD-2-Clause (1), CC0-1.0 (1), (MIT AND Zlib) (1), Unlicense (1), 0BSD (1).
+**Interface packages (243):** MIT (178), ISC (36), Apache-2.0 (11), BSD-3-Clause (7), OFL-1.1 (2), Apache-2.0 OR MIT (1), MIT OR Apache-2.0 (1), PSF-2.0 (1), (MPL-2.0 OR Apache-2.0) (1), BSD-2-Clause (1), CC0-1.0 (1), (MIT AND Zlib) (1), Unlicense (1), 0BSD (1).
 
 ## Interface packages
 
@@ -131,20 +131,16 @@ These run as separate programs or are downloaded only when you ask; they keep th
 | [@types/react-dom](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/react-dom) | 19.3.0 | MIT |
 | [@types/trusted-types](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/trusted-types) | 2.0.7 | MIT |
 | [@upsetjs/venn.js](https://github.com/upsetjs/venn.js) | 2.0.0 | MIT |
-| [anymatch](https://github.com/micromatch/anymatch) | 3.1.3 | ISC |
 | [argparse](https://github.com/nodeca/argparse#readme) | 3.0.2 | PSF-2.0 |
 | [aria-hidden](https://github.com/theKashey/aria-hidden#readme) | 1.2.6 | MIT |
-| [binary-extensions](https://github.com/sindresorhus/binary-extensions#readme) | 2.3.0 | MIT |
-| [braces](https://github.com/micromatch/braces) | 3.0.3 | MIT |
 | [browser-fs-access](https://github.com/GoogleChromeLabs/browser-fs-access#readme) | 0.29.1 | Apache-2.0 |
 | [canvas-roundrect-polyfill](https://github.com/Kaiido/roundRect#readme) | 0.0.1 | MIT |
 | [chevrotain](https://chevrotain.io/docs/) | 11.0.3, 11.1.2 | Apache-2.0 |
 | [chevrotain-allstar](https://github.com/langium/chevrotain-allstar#readme) | 0.3.1 | MIT |
-| [chokidar](https://github.com/paulmillr/chokidar) | 3.6.0 | MIT |
 | [class-variance-authority](https://github.com/joe-bell/cva#readme) | 0.7.1 | Apache-2.0 |
 | [clsx](https://github.com/lukeed/clsx#readme) | 1.1.1, 2.1.1 | MIT |
 | [cmdk](https://github.com/pacocoursey/cmdk#readme) | 1.1.1 | MIT |
-| [commander](https://github.com/tj/commander.js#readme) | 7.2.0, 8.3.0, 15.0.0 | MIT |
+| [commander](https://github.com/tj/commander.js#readme) | 7.2.0, 15.0.0 | MIT |
 | [construct-style-sheets-polyfill](https://github.com/calebdwilliams/construct-style-sheets#readme) | 3.1.0 | MIT |
 | [cose-base](https://github.com/iVis-at-Bilkent/cose-base#readme) | 1.0.3, 2.2.0 | MIT |
 | [crc-32](https://github.com/SheetJS/js-crc32#readme) | 0.3.0 | Apache-2.0 |
@@ -198,34 +194,27 @@ These run as separate programs or are downloaded only when you ask; they keep th
 | [es-toolkit](https://es-toolkit.dev) | 1.52.0 | MIT |
 | [es6-promise-pool](https://github.com/timdp/es6-promise-pool#readme) | 2.5.0 | MIT |
 | [fastdom](https://github.com/wilsonpage/fastdom) | 1.0.12 | MIT |
-| [fill-range](https://github.com/jonschlinkert/fill-range) | 7.1.1 | MIT |
 | [foliate-js](https://github.com/johnfactotum/foliate-js#readme) | 1.0.1 | MIT |
 | [fractional-indexing](https://github.com/rocicorp/fractional-indexing#readme) | 3.2.0 | CC0-1.0 |
 | [fuzzy](https://github.com/mattyork/fuzzy) | 0.1.3 | MIT |
 | [get-nonce](https://github.com/theKashey/get-nonce) | 1.0.1 | MIT |
-| [glob-parent](https://github.com/gulpjs/glob-parent#readme) | 5.1.2 | ISC |
 | [glur](https://github.com/andr83/glur/issues) | 1.1.2 | MIT |
 | [hachure-fill](https://github.com/pshihn/hachure-fill#readme) | 0.5.2 | MIT |
 | [highlight.js](https://highlightjs.org/) | 11.12.0 | BSD-3-Clause |
 | [iconv-lite](https://github.com/ashtuchkin/iconv-lite) | 0.6.3 | MIT |
 | [image-blob-reduce](https://github.com/nodeca/image-blob-reduce#readme) | 3.0.1 | MIT |
-| [immutable](https://immutable-js.com) | 4.3.9 | MIT |
 | [import-meta-resolve](https://github.com/wooorm/import-meta-resolve#readme) | 4.2.0 | MIT |
 | [inherits](https://github.com/isaacs/inherits#readme) | 2.0.4 | ISC |
 | [internmap](https://github.com/mbostock/internmap/) | 1.0.1, 2.0.3 | ISC |
-| [is-binary-path](https://github.com/sindresorhus/is-binary-path#readme) | 2.1.0 | MIT |
-| [is-extglob](https://github.com/jonschlinkert/is-extglob) | 2.1.1 | MIT |
-| [is-glob](https://github.com/micromatch/is-glob) | 4.0.3 | MIT |
-| [is-number](https://github.com/jonschlinkert/is-number) | 7.0.0 | MIT |
 | [isexe](https://github.com/isaacs/isexe#readme) | 2.0.0 | ISC |
 | [jotai](https://github.com/pmndrs/jotai) | 2.11.0 | MIT |
 | [jotai-scope](https://github.com/jotaijs/jotai-scope#readme) | 0.7.2 | MIT |
-| [katex](https://katex.org) | 0.16.47, 0.18.9 | MIT |
+| [katex](https://katex.org) | 0.18.9 | MIT |
 | [khroma](https://github.com/fabiospampinato/khroma#readme) | 2.1.0 | MIT |
 | [langium](https://langium.org) | 3.3.1 | MIT |
 | [layout-base](https://github.com/iVis-at-Bilkent/layout-base#readme) | 1.0.2, 2.0.1 | MIT |
 | [linkify-it](https://github.com/markdown-it/linkify-it#readme) | 6.1.0 | MIT |
-| [lodash-es](https://lodash.com/custom-builds) | 4.17.21, 4.17.23, 4.18.1 | MIT |
+| [lodash-es](https://lodash.com/custom-builds) | 4.18.1 | MIT |
 | [lodash.debounce](https://lodash.com/) | 4.0.8 | MIT |
 | [lodash.throttle](https://lodash.com/) | 4.1.1 | MIT |
 | [lucide-react](https://lucide.dev) | 1.48.0 | ISC |
@@ -234,8 +223,7 @@ These run as separate programs or are downloaded only when you ask; they keep th
 | [mdurl](https://github.com/markdown-it/mdurl#readme) | 2.1.0 | MIT |
 | [mermaid](https://github.com/mermaid-js/mermaid#readme) | 11.17.2, 12.0.0 | MIT |
 | [multimath](https://github.com/nodeca/multimath#readme) | 2.0.0 | MIT |
-| [nanoid](https://github.com/ai/nanoid#readme) | 3.3.3, 4.0.2 | MIT |
-| [normalize-path](https://github.com/jonschlinkert/normalize-path) | 3.0.0 | MIT |
+| [nanoid](https://github.com/ai/nanoid#readme) | 3.3.19, 5.1.16 | MIT |
 | [object-assign](https://github.com/sindresorhus/object-assign#readme) | 4.1.1 | MIT |
 | [open-color](https://github.com/yeun/open-color) | 1.9.1 | MIT |
 | [package-manager-detector](https://github.com/antfu-collective/package-manager-detector#readme) | 1.8.0 | MIT |
@@ -245,7 +233,6 @@ These run as separate programs or are downloaded only when you ask; they keep th
 | [pdfjs-dist](https://mozilla.github.io/pdf.js/) | 6.3.289 | Apache-2.0 |
 | [perfect-freehand](https://github.com/steveruizok/perfect-freehand#readme) | 1.2.0, 1.2.3 | MIT |
 | [pica](https://github.com/nodeca/pica) | 7.1.1 | MIT |
-| [picomatch](https://github.com/micromatch/picomatch) | 2.3.2 | MIT |
 | [png-chunk-text](https://github.com/hughsk/png-chunk-text) | 1.0.0 | MIT |
 | [png-chunks-encode](https://github.com/hughsk/png-chunks-encode) | 1.0.0 | MIT |
 | [png-chunks-extract](https://github.com/hughsk/png-chunks-extract) | 1.0.0 | MIT |
@@ -258,23 +245,19 @@ These run as separate programs or are downloaded only when you ask; they keep th
 | [react-remove-scroll](https://github.com/theKashey/react-remove-scroll#readme) | 2.7.2 | MIT |
 | [react-remove-scroll-bar](https://github.com/theKashey/react-remove-scroll-bar#readme) | 2.3.8 | MIT |
 | [react-style-singleton](https://github.com/theKashey/react-style-singleton#readme) | 2.2.3 | MIT |
-| [readdirp](https://github.com/paulmillr/readdirp) | 3.6.0 | MIT |
 | [robust-predicates](https://github.com/mourner/robust-predicates#readme) | 3.0.3 | Unlicense |
 | [roughjs](https://roughjs.com) | 4.6.4, 4.6.6 | MIT |
 | [rw](https://github.com/mbostock/rw) | 1.3.3 | BSD-3-Clause |
 | [safer-buffer](https://github.com/ChALkeR/safer-buffer#readme) | 2.1.2 | MIT |
-| [sass](https://github.com/sass/dart-sass) | 1.51.0 | MIT |
 | [scheduler](https://react.dev/) | 0.28.0 | MIT |
 | [shebang-command](https://github.com/kevva/shebang-command#readme) | 2.0.0 | MIT |
 | [shebang-regex](https://github.com/sindresorhus/shebang-regex#readme) | 3.0.0 | MIT |
 | [sliced](https://github.com/aheckmann/sliced#readme) | 1.0.1 | MIT |
 | [sonner](https://sonner.emilkowal.ski/) | 2.0.8 | MIT |
-| [source-map-js](https://github.com/7rulnik/source-map-js) | 1.2.1 | BSD-3-Clause |
 | [strictdom](https://github.com/wilsonpage/strictdom) | 1.0.1 | MIT |
 | [stylis](https://github.com/thysultan/stylis.js) | 4.4.0 | MIT |
 | [tailwind-merge](https://github.com/dcastil/tailwind-merge) | 3.7.0 | MIT |
 | [tinyexec](https://github.com/tinylibs/tinyexec#readme) | 1.3.1 | MIT |
-| [to-regex-range](https://github.com/micromatch/to-regex-range) | 5.0.1 | MIT |
 | [ts-dedent](https://github.com/tamino-martinius/node-ts-dedent#readme) | 2.3.0 | MIT |
 | [ts-fsrs](https://github.com/open-spaced-repetition/ts-fsrs#readme) | 5.4.2 | MIT |
 | [tslib](https://www.typescriptlang.org/) | 2.8.1 | 0BSD |
@@ -819,7 +802,6 @@ These run as separate programs or are downloaded only when you ask; they keep th
 | [qoi](https://github.com/aldanor/qoi-rust) | 0.4.1 | MIT OR Apache-2.0 |
 | [qrcode](https://github.com/kennytm/qrcode-rust) | 0.14.1 | MIT OR Apache-2.0 |
 | [quick-error](http://github.com/tailhook/quick-error) | 2.0.1 | MIT OR Apache-2.0 |
-| [quick-xml](https://github.com/tafia/quick-xml) | 0.38.4 | MIT |
 | [quick-xml](https://github.com/tafia/quick-xml) | 0.41.0 | MIT |
 | [quick-xml](https://github.com/tafia/quick-xml) | 0.42.0 | MIT |
 | [quote](https://github.com/dtolnay/quote) | 1.0.47 | MIT OR Apache-2.0 |

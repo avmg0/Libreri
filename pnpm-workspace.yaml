@@ -4,3 +4,15 @@ packages:
 
 onlyBuiltDependencies:
   - esbuild
+
+# Security fixes for packages that other packages bring in (Dependabot
+# alerts). Each forces a fixed version of a dependency of a dependency.
+overrides:
+  lodash-es: ^4.18.1
+  "nanoid@<4": ^3.3.18
+  "nanoid@>=4 <6": ^5.1.16
+  "katex@<0.18.2": ^0.18.9
+  source-map-js: ^1.2.2
+  # Excalidraw lists Sass, but ships compiled CSS: Sass (and the file
+  # watcher that brings in braces) is never used.
+  "@excalidraw/excalidraw>sass": "-"

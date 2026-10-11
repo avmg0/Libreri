@@ -347,20 +347,20 @@ fn podcast_tags(bytes: &[u8]) -> Vec<PodcastTags> {
     while let Ok(ev) = reader.read_event_into(&mut buf) {
         match &ev {
             Event::Eof => break,
-            Event::Start(e) if matches!(e.local_name().as_ref(), b"item" | b"entry") => {
+            Event::Start(e) if matches!(e.local_name().as_ref(), "item" | "entry") => {
                 cur = Some(PodcastTags::default());
             }
-            Event::End(e) if matches!(e.local_name().as_ref(), b"item" | b"entry") => {
+            Event::End(e) if matches!(e.local_name().as_ref(), "item" | "entry") => {
                 out.push(cur.take().unwrap_or_default());
             }
-            Event::Start(e) if e.name().as_ref() == b"itunes:duration" => {
+            Event::Start(e) if e.name().as_ref() == "itunes:duration" => {
                 in_duration = cur.is_some();
             }
-            Event::End(e) if e.name().as_ref() == b"itunes:duration" => {
+            Event::End(e) if e.name().as_ref() == "itunes:duration" => {
                 in_duration = false;
             }
             Event::Text(t) if in_duration => {
-                if let (Some(tags), v) = (cur.as_mut(), String::from_utf8_lossy(t.as_ref())) {
+                if let (Some(tags), v) = (cur.as_mut(), t.xml10_content()) {
                     tags.duration = itunes_duration(&v);
                 }
             }
@@ -370,17 +370,21 @@ fn podcast_tags(bytes: &[u8]) -> Vec<PodcastTags> {
                     continue;
                 };
                 let name = e.name();
-                let attr = |k: &[u8]| {
+                let attr = |k: &str| {
                     e.attributes().flatten().find_map(|a| {
                         (a.key.as_ref() == k)
-                            .then(|| a.unescape_value().ok().map(|v| v.trim().to_owned()))
+                            .then(|| {
+                                a.normalized_value(quick_xml::XmlVersion::Implicit1_0)
+                                    .ok()
+                                    .map(|v| v.trim().to_owned())
+                            })
                             .flatten()
                     })
                 };
                 match name.as_ref() {
-                    b"podcast:transcript" => {
-                        if let Some(url) = attr(b"url").filter(|u| u.starts_with("http")) {
-                            let kind = attr(b"type").unwrap_or_default().to_ascii_lowercase();
+                    "podcast:transcript" => {
+                        if let Some(url) = attr("url").filter(|u| u.starts_with("http")) {
+                            let kind = attr("type").unwrap_or_default().to_ascii_lowercase();
                             let better = tags
                                 .transcript
                                 .as_ref()
@@ -390,8 +394,8 @@ fn podcast_tags(bytes: &[u8]) -> Vec<PodcastTags> {
                             }
                         }
                     }
-                    b"podcast:chapters" => {
-                        if let Some(url) = attr(b"url").filter(|u| u.starts_with("http")) {
+                    "podcast:chapters" => {
+                        if let Some(url) = attr("url").filter(|u| u.starts_with("http")) {
                             tags.chapters = Some(url);
                         }
                     }

@@ -1,7 +1,7 @@
 //! OPML: the subscription lists feed readers import and export.
 
 use quick_xml::events::{BytesDecl, BytesEnd, BytesStart, BytesText, Event};
-use quick_xml::{Reader, Writer};
+use quick_xml::{Reader, Writer, XmlVersion};
 
 /// A folder or a feed in an OPML file.
 #[derive(Debug, Clone, PartialEq)]
@@ -29,9 +29,9 @@ pub fn read(xml: &str) -> Result<Vec<Node>, String> {
         match reader.read_event() {
             Err(e) => return Err(format!("this OPML file could not be read ({e})")),
             Ok(Event::Eof) => break,
-            Ok(Event::Start(e)) if e.name().as_ref() == b"body" => in_body = true,
-            Ok(Event::End(e)) if e.name().as_ref() == b"body" => in_body = false,
-            Ok(Event::Start(e)) if in_body && e.name().as_ref() == b"outline" => {
+            Ok(Event::Start(e)) if e.name().as_ref() == "body" => in_body = true,
+            Ok(Event::End(e)) if e.name().as_ref() == "body" => in_body = false,
+            Ok(Event::Start(e)) if in_body && e.name().as_ref() == "outline" => {
                 match outline(&e) {
                     Some(feed) => {
                         feeds += 1;
@@ -43,13 +43,13 @@ pub fn read(xml: &str) -> Result<Vec<Node>, String> {
                     None => stack.push((title_of(&e), Vec::new())),
                 }
             }
-            Ok(Event::Empty(e)) if in_body && e.name().as_ref() == b"outline" => {
+            Ok(Event::Empty(e)) if in_body && e.name().as_ref() == "outline" => {
                 if let Some(feed) = outline(&e) {
                     feeds += 1;
                     stack.last_mut().expect("stack").1.push(feed);
                 }
             }
-            Ok(Event::End(e)) if in_body && e.name().as_ref() == b"outline" && stack.len() > 1 => {
+            Ok(Event::End(e)) if in_body && e.name().as_ref() == "outline" && stack.len() > 1 => {
                 let (name, children) = stack.pop().expect("stack");
                 let parent = &mut stack.last_mut().expect("stack").1;
                 if name.is_empty() {
@@ -76,28 +76,32 @@ pub fn read(xml: &str) -> Result<Vec<Node>, String> {
     Ok(stack.pop().map(|(_, c)| c).unwrap_or_default())
 }
 
-fn attr(e: &BytesStart, name: &[u8]) -> Option<String> {
+fn attr(e: &BytesStart, name: &str) -> Option<String> {
     e.attributes().flatten().find_map(|a| {
         (a.key.as_ref().eq_ignore_ascii_case(name))
-            .then(|| a.unescape_value().ok().map(|v| v.trim().to_owned()))
+            .then(|| {
+                a.normalized_value(XmlVersion::Implicit1_0)
+                    .ok()
+                    .map(|v| v.trim().to_owned())
+            })
             .flatten()
     })
 }
 
 fn title_of(e: &BytesStart) -> String {
-    attr(e, b"title")
+    attr(e, "title")
         .filter(|t| !t.is_empty())
-        .or_else(|| attr(e, b"text"))
+        .or_else(|| attr(e, "text"))
         .unwrap_or_default()
 }
 
 fn outline(e: &BytesStart) -> Option<Node> {
-    let url = attr(e, b"xmlUrl").filter(|u| u.starts_with("http"))?;
+    let url = attr(e, "xmlUrl").filter(|u| u.starts_with("http"))?;
     let title = title_of(e);
     Some(Node::Feed {
         title: if title.is_empty() { url.clone() } else { title },
         url,
-        site: attr(e, b"htmlUrl").filter(|u| u.starts_with("http")),
+        site: attr(e, "htmlUrl").filter(|u| u.starts_with("http")),
     })
 }
 
